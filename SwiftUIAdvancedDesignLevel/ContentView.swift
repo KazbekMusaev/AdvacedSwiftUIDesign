@@ -6,10 +6,19 @@
 //
 
 import SwiftUI
+import AudioToolbox
 
 struct ContentView: View {
     @State private var email = String()
     @State private var password = String()
+    
+    @State private var editindEmailTextfield: Bool = false
+    @State private var editindPasswordTextfield: Bool = false
+    
+    @State private var emailIconBounce: Bool = false
+    @State private var passwordIconBounce: Bool = false
+    
+    private let generator = UISelectionFeedbackGenerator()
     
     var body: some View {
         ZStack {
@@ -22,17 +31,31 @@ struct ContentView: View {
                     Text("Регистрация")
                         .font(.title2.bold())
                         .foregroundStyle(.white)
-                    Text("Доступ к более чем 120 часам курсов, учебных пособий и прямых трансляций")
+                    Text("Доступ к сообществу Гутанской общины")
                         .font(.subheadline)
                         .foregroundStyle(.white.opacity(0.7))
                     HStack(spacing: 12) {
-                        Image(systemName: "envelope.open.fill")
-                            .foregroundStyle(.white)
-                        TextField("Email", text: $email)
-                            .preferredColorScheme(.dark)
-                            .foregroundStyle(.white.opacity(0.7))
-                            .textInputAutocapitalization(.none)
-                            .textContentType(.emailAddress)
+                        TextfieldIcon(iconName: "envelope.open.fill", currentlyEditing: $editindEmailTextfield)
+                            .scaleEffect(emailIconBounce ? 1.2 : 1.0)
+                        TextField("Email", text: $email) { isEditing in
+                            editindEmailTextfield = isEditing
+                            editindPasswordTextfield = false
+                            generator.selectionChanged()
+                            if isEditing {
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.4, blendDuration: 0.5)) {
+                                    emailIconBounce.toggle()
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.4, blendDuration: 0.5)) {
+                                        emailIconBounce.toggle()
+                                    }
+                                }
+                            }
+                        }
+                        .preferredColorScheme(.dark)
+                        .foregroundStyle(.white.opacity(0.7))
+                        .textInputAutocapitalization(.none)
+                        .textContentType(.emailAddress)
                     }
                     .frame(height: 52)
                     .overlay {
@@ -47,13 +70,29 @@ struct ContentView: View {
                     }
                     
                     HStack(spacing: 12) {
-                        Image(systemName: "key.fill")
-                            .foregroundStyle(.white)
+                        TextfieldIcon(iconName: "key.fill",
+                                      currentlyEditing: $editindPasswordTextfield)
+                        .scaleEffect(passwordIconBounce ? 1.2 : 1.0)
                         SecureField("Password", text: $password)
                             .preferredColorScheme(.dark)
                             .foregroundStyle(.white.opacity(0.7))
                             .textInputAutocapitalization(.none)
                             .textContentType(.password)
+                            .onTapGesture {
+                                editindPasswordTextfield = true
+                                editindEmailTextfield = false
+                                generator.selectionChanged()
+                                if editindPasswordTextfield {
+                                    withAnimation(.spring(duration: 0.3, bounce: 0.4, blendDuration: 0.5)) {
+                                        passwordIconBounce.toggle()
+                                    }
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                        withAnimation(.spring(duration: 0.3, bounce: 0.4, blendDuration: 0.5)) {
+                                            passwordIconBounce.toggle()
+                                        }
+                                    }
+                                }
+                            }
                     }
                     .frame(height: 52)
                     .overlay {
@@ -66,6 +105,7 @@ struct ContentView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 16))
                             .opacity(0.8)
                     }
+                    
                     
                     GradientButton()
                     

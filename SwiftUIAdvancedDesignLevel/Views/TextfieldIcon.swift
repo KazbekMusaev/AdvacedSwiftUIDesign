@@ -61,7 +61,3 @@ struct TextfieldIcon: View {
         .padding(.leading, 8)
     }
 }
-
-#Preview {
-    TextfieldIcon(iconName: "key.fill" ,currentlyEditing: .constant(true))
-}

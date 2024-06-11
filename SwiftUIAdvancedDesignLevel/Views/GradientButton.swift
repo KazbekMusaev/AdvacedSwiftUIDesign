@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GradientButton: View {
+   
+    var buttonLabel: String
     @State private var angle: Double = 0.0
     let gradient1: [Color] = [
         Color.init(red: 101/255, green: 134/255, blue: 1),
@@ -15,10 +17,10 @@ struct GradientButton: View {
         Color.init(red: 109/255, green: 1, blue: 185/255),
         Color.init(red: 39/255, green: 232/255, blue: 1)
     ]
-    
+    var buttonAction: () -> Void
     var body: some View {
         Button {
-            print("зарегистрироваться")
+            buttonAction()
         } label: {
             GeometryReader { proxy in
                 ZStack {
@@ -31,7 +33,7 @@ struct GradientButton: View {
                                 .frame(maxWidth: proxy.size.width - 16)
                                 .blur(radius: 8.0)
                         }
-                    GradientText(text: "Зарегистрироваться")
+                    GradientText(text: buttonLabel)
                         .font(.headline)
                         .frame(width: proxy.size.width - 16)
                         .frame(height: 50)

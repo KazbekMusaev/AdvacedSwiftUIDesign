@@ -15,6 +15,7 @@
 		180B681B2C0C487F002FAA6B /* SwiftUIAdvancedDesignLevel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 180B68192C0C487F002FAA6B /* SwiftUIAdvancedDesignLevel.xcdatamodeld */; };
 		180B68242C0C49DA002FAA6B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180B68212C0C49DA002FAA6B /* ImagePicker.swift */; };
 		180B68252C0C49DA002FAA6B /* VisualEffectBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180B68222C0C49DA002FAA6B /* VisualEffectBlur.swift */; };
+		1839E2C22C18D5E3009E3341 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1839E2C12C18D5E3009E3341 /* ProfileView.swift */; };
 		1861C2822C0CE7EB00501AAE /* GradientText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861C2812C0CE7EB00501AAE /* GradientText.swift */; };
 		1861C2842C0CE82700501AAE /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861C2832C0CE82700501AAE /* GradientButton.swift */; };
 		1861C2862C0CE86600501AAE /* TextfieldIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861C2852C0CE86600501AAE /* TextfieldIcon.swift */; };
@@ -22,6 +23,7 @@
 		18A9440B2C18775B008D9615 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 18A9440A2C18775B008D9615 /* FirebaseStorage */; };
 		18A9440D2C187763008D9615 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 18A9440C2C187763008D9615 /* FirebaseAppCheck */; };
 		18A9440F2C1877A2008D9615 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18A9440E2C1877A1008D9615 /* GoogleService-Info.plist */; };
+		18A944142C187B3B008D9615 /* FirebaseAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A944132C187B3B008D9615 /* FirebaseAuthViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +36,12 @@
 		180B681A2C0C487F002FAA6B /* SwiftUIAdvancedDesignLevel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftUIAdvancedDesignLevel.xcdatamodel; sourceTree = "<group>"; };
 		180B68212C0C49DA002FAA6B /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		180B68222C0C49DA002FAA6B /* VisualEffectBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectBlur.swift; sourceTree = "<group>"; };
+		1839E2C12C18D5E3009E3341 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1861C2812C0CE7EB00501AAE /* GradientText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientText.swift; sourceTree = "<group>"; };
 		1861C2832C0CE82700501AAE /* GradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
 		1861C2852C0CE86600501AAE /* TextfieldIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldIcon.swift; sourceTree = "<group>"; };
 		18A9440E2C1877A1008D9615 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		18A944132C187B3B008D9615 /* FirebaseAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				18A9440E2C1877A1008D9615 /* GoogleService-Info.plist */,
+				18A944102C187AFA008D9615 /* ViewModel */,
 				180B68232C0C49DA002FAA6B /* Helpers */,
 				180B680E2C0C487D002FAA6B /* SwiftUIAdvancedDesignLevelApp.swift */,
 				180B68102C0C487D002FAA6B /* ContentView.swift */,
@@ -110,6 +115,7 @@
 				1861C2812C0CE7EB00501AAE /* GradientText.swift */,
 				1861C2832C0CE82700501AAE /* GradientButton.swift */,
 				1861C2852C0CE86600501AAE /* TextfieldIcon.swift */,
+				1839E2C12C18D5E3009E3341 /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -119,6 +125,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18A944102C187AFA008D9615 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				18A944132C187B3B008D9615 /* FirebaseAuthViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,9 +219,11 @@
 				1861C2822C0CE7EB00501AAE /* GradientText.swift in Sources */,
 				1861C2862C0CE86600501AAE /* TextfieldIcon.swift in Sources */,
 				180B68112C0C487D002FAA6B /* ContentView.swift in Sources */,
+				18A944142C187B3B008D9615 /* FirebaseAuthViewModel.swift in Sources */,
 				180B68242C0C49DA002FAA6B /* ImagePicker.swift in Sources */,
 				180B68252C0C49DA002FAA6B /* VisualEffectBlur.swift in Sources */,
 				180B681B2C0C487F002FAA6B /* SwiftUIAdvancedDesignLevel.xcdatamodeld in Sources */,
+				1839E2C22C18D5E3009E3341 /* ProfileView.swift in Sources */,
 				180B680F2C0C487D002FAA6B /* SwiftUIAdvancedDesignLevelApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

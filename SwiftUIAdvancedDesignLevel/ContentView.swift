@@ -9,14 +9,15 @@ import SwiftUI
 import AudioToolbox
 
 struct ContentView: View {
-    @State private var email = String()
-    @State private var password = String()
+    @StateObject private var firebaseAuthModel = FirebaseAuthViewModel()
     
     @State private var editindEmailTextfield: Bool = false
     @State private var editindPasswordTextfield: Bool = false
     
     @State private var emailIconBounce: Bool = false
     @State private var passwordIconBounce: Bool = false
+    
+    @State private var showProfileView: Bool = false
     
     private let generator = UISelectionFeedbackGenerator()
     
@@ -31,13 +32,13 @@ struct ContentView: View {
                     Text("Регистрация")
                         .font(.title2.bold())
                         .foregroundStyle(.white)
-                    Text("Доступ к сообществу Гутанской общины")
+                    Text("Доступ к приложению")
                         .font(.subheadline)
                         .foregroundStyle(.white.opacity(0.7))
                     HStack(spacing: 12) {
                         TextfieldIcon(iconName: "envelope.open.fill", currentlyEditing: $editindEmailTextfield)
                             .scaleEffect(emailIconBounce ? 1.2 : 1.0)
-                        TextField("Email", text: $email) { isEditing in
+                        TextField("Email", text: $firebaseAuthModel.email) { isEditing in
                             editindEmailTextfield = isEditing
                             editindPasswordTextfield = false
                             generator.selectionChanged()
@@ -73,7 +74,7 @@ struct ContentView: View {
                         TextfieldIcon(iconName: "key.fill",
                                       currentlyEditing: $editindPasswordTextfield)
                         .scaleEffect(passwordIconBounce ? 1.2 : 1.0)
-                        SecureField("Password", text: $password)
+                        SecureField("Пароль", text: $firebaseAuthModel.password)
                             .preferredColorScheme(.dark)
                             .foregroundStyle(.white.opacity(0.7))
                             .textInputAutocapitalization(.none)
@@ -107,7 +108,14 @@ struct ContentView: View {
                     }
                     
                     
-                    GradientButton()
+                    GradientButton(buttonLabel: "Зарегистрироваться") {
+                        firebaseAuthModel.createAccount()
+                    }
+                    .onAppear {
+                        firebaseAuthModel.checkAuth { haveUser in
+                            showProfileView = haveUser
+                        }
+                    }
                     
                     Text("Нажатие кнопки означает, что вы соглашаетесь с политикой конфиденциальности и условиями пользования")
                         .font(.footnote)
@@ -144,11 +152,11 @@ struct ContentView: View {
             .clipShape(RoundedRectangle(cornerRadius: 30))
             .padding(.horizontal)
         }
+        .fullScreenCover(isPresented: $showProfileView) {
+            ProfileView()
+        }
         
     }
     
 }
 
-#Preview {
-    ContentView()
-}
